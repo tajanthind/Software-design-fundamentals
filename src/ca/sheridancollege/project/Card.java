@@ -2,7 +2,7 @@
 package ca.sheridancollege.project;
 
 
-public abstract class Card 
+public class Card 
 {
     private String color;
 	private String num;

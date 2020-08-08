@@ -12,53 +12,36 @@ import java.util.ArrayList;
  * child of this class and instantiate the methods given.
  * @author dancye, 2018
  */
-public abstract class Game implements DiscardPile, Turn, Mechanics
+public  class Game implements DiscardPile, Turn, Mechanics
 {
-    private final String gameName;//the title of the game
-    private ArrayList <Player> players;// the players of the game
-    
-    public Game(String givenName)
-    {
-        gameName = givenName;
-        players = new ArrayList();
-    }
+  private final String gameName;
+	ArrayList<Player> players = new ArrayList<Player>();
+	ArrayList<Card> discard = new ArrayList<Card>();
+	ArrayList<Card> cards = new ArrayList<Card>();
 
-    /**
-     * @return the gameName
-     */
-    public String getGameName() 
-    {
-        return gameName;
-    }
-    
-     /**
-     * @return the players of this game
-     */
-    public ArrayList <Player> getPlayers() 
-    {
-        return players;
-    }
+	public Game(String givenName, ArrayList<Card> cards) {
+		this.cards = cards;
+		gameName = givenName;
+		players.add(new Player(1, "Player1", cards));
+		players.add(new Player(2, "Player2", cards));
+		players.add(new Player(3, "Player3", cards));
+		players.add(new Player(4, "Player4", cards));
+	}
 
-    /**
-     * @param players the players of this game
-     */
-    public void setPlayers(ArrayList <Player> players) 
-    {
-        this.players = players;
-    }
-    
-    /**
-     * Play the game. This might be one method or many method calls depending
-     * on your game.
-     */
-    public abstract void play();
-    
-    /**
-     * When the game is over, use this method to declare and display a winning
-     * player.
-     */
-    public abstract void declareWinner();
+	public String getGameName() {
+		return gameName;
+	}
 
-   
+	public void gameEnd(Player player) {
+		if (player.hand == null) {
+			System.out.println(player.getPlayerName() + " Wins");
+		}
+	}
+
+	public void start(Player player) {
+		System.out.println(player.getPlayerName() + " Turn");
+		playerTurn(player, discard, cards, players);
+	}
+
     
 }//end class
